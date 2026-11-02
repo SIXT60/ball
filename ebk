@@ -1,0 +1,108 @@
+-- Forced UI Script (LocalScript)
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- Create ScreenGui
+local gui = Instance.new("ScreenGui")
+gui.Name = "ForcedWorkInkUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- Main Frame
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 420, 0, 200)
+frame.Position = UDim2.new(0.5, -210, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+frame.Parent = gui
+
+-- Rounded corners
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = frame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -40, 0, 30)
+title.Position = UDim2.new(0, 10, 0, 5)
+title.BackgroundTransparency = 1
+title.Text = "EBK SCRIPT"                                           -- NAME FIX
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+-- Close Button (X)
+local close = Instance.new("TextButton")
+close.Size = UDim2.new(0, 30, 0, 30)
+close.Position = UDim2.new(1, -35, 0, 5)
+close.BackgroundColor3 = Color3.fromRGB(200, 60, 60)
+close.Text = "X"
+close.TextColor3 = Color3.fromRGB(255, 255, 255)
+close.TextScaled = true
+close.Font = Enum.Font.GothamBold
+close.Parent = frame
+
+local closeCorner = Instance.new("UICorner")
+closeCorner.CornerRadius = UDim.new(0, 8)
+closeCorner.Parent = close
+
+close.MouseButton1Click:Connect(function()
+	gui:Destroy()
+end)
+
+-- TextBox (non-editable)
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(1, -20, 0, 45)
+textBox.Position = UDim2.new(0, 10, 0, 50)
+textBox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+textBox.Text = "https://work.ink/2a0Q/ebk-ball-script"
+textBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+textBox.TextScaled = true
+textBox.Font = Enum.Font.Gotham
+textBox.ClearTextOnFocus = false
+textBox.TextEditable = false
+textBox.Parent = frame
+
+local boxCorner = Instance.new("UICorner")
+boxCorner.CornerRadius = UDim.new(0, 8)
+boxCorner.Parent = textBox
+
+-- Copy Button
+local copy = Instance.new("TextButton")
+copy.Size = UDim2.new(0, 120, 0, 35)
+copy.Position = UDim2.new(0.5, -60, 0, 105)
+copy.BackgroundColor3 = Color3.fromRGB(60, 160, 80)
+copy.Text = "Copy Link"
+copy.TextColor3 = Color3.fromRGB(255, 255, 255)
+copy.TextScaled = true
+copy.Font = Enum.Font.GothamBold
+copy.Parent = frame
+
+local copyCorner = Instance.new("UICorner")
+copyCorner.CornerRadius = UDim.new(0, 8)
+copyCorner.Parent = copy
+
+copy.MouseButton1Click:Connect(function()
+	if setclipboard then
+		setclipboard(textBox.Text)
+		copy.Text = "Copied!"
+		task.delay(1.5, function()
+			copy.Text = "Copy Link"
+		end)
+	end
+end)
+
+-- Bottom Description Text
+local desc = Instance.new("TextLabel")
+desc.Size = UDim2.new(1, -20, 0, 30)
+desc.Position = UDim2.new(0, 10, 1, -35)
+desc.BackgroundTransparency = 1
+desc.Text = "please complete this short work.ink for the script :)"
+desc.TextColor3 = Color3.fromRGB(200, 200, 200)
+desc.TextScaled = true
+desc.Font = Enum.Font.Gotham
+desc.Parent = frame
